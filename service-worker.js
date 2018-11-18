@@ -1,7 +1,8 @@
 // Start
-const CACHE_NAME = 'paulbjensendotcodotuk-2';
+const CACHE_NAME = 'paulbjensendotcodotuk-3';
 const urlsToCache = [
   '/',
+  'android-chrome-512x512.png',
   'android-chrome-192x192.png',
   'apple-touch-icon.png',
   'browserconfig.xml',
