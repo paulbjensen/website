@@ -1,0 +1,829 @@
+<!doctype html>
+<html>
+<head>
+<meta charset='UTF-8'><meta name='viewport' content='width=device-width initial-scale=1'><style type='text/css'>html {overflow-x: initial !important;}</style>
+<style type='text/css'  id="style-base">:root { --bg-color: #ffffff; --text-color: #333333; --select-text-bg-color: #B5D6FC; --select-text-font-color: auto; --monospace: "Lucida Console",Consolas,"Courier",monospace; --title-bar-height: 20px; }
+.mac-os-11 { --title-bar-height: 28px; }
+html { font-size: 14px; background-color: var(--bg-color); color: var(--text-color); font-family: "Helvetica Neue", Helvetica, Arial, "Segoe UI Emoji", "SF Pro", sans-serif; -webkit-font-smoothing: antialiased; }
+h1, h2, h3, h4, h5 { white-space: pre-wrap; }
+body { margin: 0px; padding: 0px; height: auto; inset: 0px; font-size: 1rem; line-height: 1.428571; overflow-x: hidden; background: inherit; }
+iframe { margin: auto; }
+a.url { word-break: break-all; }
+a:active, a:hover { outline: 0px; }
+.in-text-selection, ::selection { text-shadow: none; background: var(--select-text-bg-color); color: var(--select-text-font-color); }
+#write { margin: 0px auto; height: auto; width: inherit; word-break: normal; overflow-wrap: break-word; position: relative; white-space: normal; overflow-x: visible; padding-top: 36px; }
+#write.first-line-indent p { text-indent: 2em; }
+#write.first-line-indent li p, #write.first-line-indent p *, #write.first-line-indent svg * { text-indent: 0px; }
+#write.first-line-indent li { margin-left: 2em; }
+.for-image #write { padding-left: 8px; padding-right: 8px; }
+body.typora-export { padding-left: 30px; padding-right: 30px; }
+.typora-export .footnote-line, .typora-export li, .typora-export p { white-space: pre-wrap; }
+.typora-export .task-list-item input { pointer-events: none; }
+@media screen and (max-width: 500px) {
+  body.typora-export { padding-left: 0px; padding-right: 0px; }
+  #write { padding-left: 20px; padding-right: 20px; }
+}
+#write li > figure:last-child { margin-bottom: 0.5rem; }
+#write ol, #write ul { position: relative; }
+img { max-width: 100%; vertical-align: middle; image-orientation: from-image; }
+button, input, select, textarea { color: inherit; font-style: inherit; font-variant-caps: inherit; font-weight: inherit; font-width: inherit; font-size: inherit; line-height: inherit; font-family: inherit; font-size-adjust: inherit; font-kerning: inherit; font-variant-alternates: inherit; font-variant-ligatures: inherit; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-variant-position: inherit; font-variant-emoji: inherit; font-feature-settings: inherit; font-optical-sizing: inherit; font-variation-settings: inherit; }
+input[type="checkbox"], input[type="radio"] { line-height: normal; padding: 0px; }
+*, ::after, ::before { box-sizing: border-box; }
+#write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p, #write pre { width: inherit; position: relative; }
+#write svg h1, #write svg h2, #write svg h3, #write svg h4, #write svg h5, #write svg h6, #write svg p { position: static; white-space: nowrap; overflow: visible; }
+foreignObject { overflow: visible; }
+p { line-height: inherit; }
+h1, h2, h3, h4, h5, h6 { break-after: avoid-page; break-inside: avoid; orphans: 4; }
+p { orphans: 4; }
+li p { orphans: 1; }
+h1 { font-size: 2rem; }
+h2 { font-size: 1.8rem; }
+h3 { font-size: 1.6rem; }
+h4 { font-size: 1.4rem; }
+h5 { font-size: 1.2rem; }
+h6 { font-size: 1rem; }
+.md-math-block, .md-rawblock, h1, h2, h3, h4, h5, h6, p { margin-top: 1rem; margin-bottom: 1rem; }
+.hidden { display: none; }
+.md-blockmeta { color: rgb(204, 204, 204); font-weight: 700; font-style: italic; }
+a { cursor: pointer; }
+sup.md-footnote { padding: 2px 4px; background-color: rgba(238, 238, 238, 0.7); color: rgb(85, 85, 85); border-radius: 4px; cursor: pointer; }
+sup.md-footnote a, sup.md-footnote a:hover { color: inherit; text-transform: inherit; text-decoration: inherit; }
+#write input[type="checkbox"] { cursor: pointer; width: inherit; height: inherit; }
+figure { overflow-x: auto; margin: 1.2em 0px; max-width: calc(100% + 16px); padding: 0px; }
+figure > table { margin: 0px; }
+thead, tr { break-inside: avoid; break-after: auto; }
+thead { display: table-header-group; }
+table { border-collapse: collapse; border-spacing: 0px; width: 100%; overflow: auto; break-inside: auto; text-align: left; }
+table.md-table td { min-width: 32px; }
+.CodeMirror-gutters { border-right-width: 0px; border-right-style: none; border-right-color: currentcolor; background-color: inherit; }
+.CodeMirror-linenumber { -webkit-user-select: none; }
+.CodeMirror { text-align: left; }
+.CodeMirror-placeholder { opacity: 0.3; }
+.CodeMirror pre { padding: 0px 4px; }
+.CodeMirror-lines { padding: 0px; }
+div.hr:focus { cursor: none; }
+#write pre { white-space: pre-wrap; }
+#write.fences-no-line-wrapping pre { white-space: pre; }
+#write pre.ty-contain-cm { white-space: normal; }
+.CodeMirror-gutters { margin-right: 4px; }
+.md-fences { font-size: 0.9rem; display: block; break-inside: avoid; text-align: left; overflow: visible; white-space: pre; background: inherit; position: relative !important; }
+.md-fences-adv-panel { width: 100%; margin-top: 10px; text-align: center; padding-top: 0px; padding-bottom: 8px; overflow-x: auto; }
+#write .md-fences.mock-cm { white-space: pre-wrap; }
+.md-fences.md-fences-with-lineno { padding-left: 0px; }
+#write.fences-no-line-wrapping .md-fences.mock-cm { white-space: pre; overflow-x: auto; }
+.md-fences.mock-cm.md-fences-with-lineno { padding-left: 8px; }
+.CodeMirror-line, twitterwidget { break-inside: avoid; }
+svg { break-inside: avoid; }
+.footnotes { opacity: 0.8; font-size: 0.9rem; margin-top: 1em; margin-bottom: 1em; }
+.footnotes + .footnotes { margin-top: 0px; }
+.md-reset { margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: top; background: 0px 0px; text-decoration: none; text-shadow: none; float: none; position: static; width: auto; height: auto; white-space: nowrap; cursor: inherit; line-height: normal; font-weight: 400; text-align: left; box-sizing: content-box; direction: ltr; }
+li div { padding-top: 0px; }
+blockquote { margin: 1rem 0px; }
+li .mathjax-block, li p { margin: 0.5rem 0px; }
+li blockquote { margin: 1rem 0px; }
+li { margin: 0px; position: relative; }
+blockquote > :last-child { margin-bottom: 0px; }
+blockquote > :first-child, li > :first-child { margin-top: 0px; }
+.footnotes-area { color: rgb(136, 136, 136); margin-top: 0.714rem; padding-bottom: 0.143rem; white-space: normal; }
+#write .footnote-line { white-space: pre-wrap; }
+@media print {
+  body, html { border: 1px solid transparent; height: 99%; break-after: avoid; break-before: avoid; font-variant-ligatures: no-common-ligatures; }
+  #write { margin-top: 0px; border-color: transparent !important; padding-top: 0px !important; padding-bottom: 0px !important; }
+  .typora-export * { print-color-adjust: exact; }
+  .typora-export #write { break-after: avoid; }
+  .typora-export #write::after { height: 0px; }
+  .is-mac table { break-inside: avoid; }
+  #write > p:nth-child(1) { margin-top: 0px; }
+  .typora-export-show-outline .typora-export-sidebar { display: none; }
+  figure { overflow-x: visible; }
+}
+.footnote-line { margin-top: 0.714em; font-size: 0.7em; }
+a img, img a { cursor: pointer; }
+pre.md-meta-block { font-size: 0.8rem; min-height: 0.8rem; white-space: pre-wrap; background: rgb(204, 204, 204); display: block; overflow-x: hidden; }
+p > .md-image:only-child:not(.md-img-error) img, p > img:only-child { display: block; margin: auto; }
+#write.first-line-indent p > .md-image:only-child:not(.md-img-error) img { left: -2em; position: relative; }
+p > .md-image:only-child { display: inline-block; width: 100%; }
+#write .MathJax_Display { margin: 0.8em 0px 0px; }
+.md-math-block { width: 100%; }
+.md-math-block:not(:empty)::after { display: none; }
+.MathJax_ref { fill: currentcolor; }
+[contenteditable="true"]:active, [contenteditable="true"]:focus, [contenteditable="false"]:active, [contenteditable="false"]:focus { outline: 0px; box-shadow: none; }
+.md-task-list-item { position: relative; list-style-type: none; }
+.task-list-item.md-task-list-item { padding-left: 0px; }
+.md-task-list-item > input { position: absolute; top: 0px; left: 0px; margin-left: -1.2em; margin-top: calc(1em - 10px); border: medium; }
+.math { font-size: 1rem; }
+.md-toc { min-height: 3.58rem; position: relative; font-size: 0.9rem; border-radius: 10px; }
+.md-toc-content { position: relative; margin-left: 0px; }
+.md-toc-content::after, .md-toc::after { display: none; }
+.md-toc-item { display: block; color: rgb(65, 131, 196); }
+.md-toc-item a { text-decoration: none; }
+.md-toc-inner:hover { text-decoration: underline; }
+.md-toc-inner { display: inline-block; cursor: pointer; }
+.md-toc-h1 .md-toc-inner { margin-left: 0px; font-weight: 700; }
+.md-toc-h2 .md-toc-inner { margin-left: 2em; }
+.md-toc-h3 .md-toc-inner { margin-left: 4em; }
+.md-toc-h4 .md-toc-inner { margin-left: 6em; }
+.md-toc-h5 .md-toc-inner { margin-left: 8em; }
+.md-toc-h6 .md-toc-inner { margin-left: 10em; }
+@media screen and (max-width: 48em) {
+  .md-toc-h3 .md-toc-inner { margin-left: 3.5em; }
+  .md-toc-h4 .md-toc-inner { margin-left: 5em; }
+  .md-toc-h5 .md-toc-inner { margin-left: 6.5em; }
+  .md-toc-h6 .md-toc-inner { margin-left: 8em; }
+}
+a.md-toc-inner { font-size: inherit; font-style: inherit; font-weight: inherit; line-height: inherit; }
+.footnote-line a:not(.reversefootnote) { color: inherit; }
+.reversefootnote { font-family: ui-monospace, sans-serif; }
+.md-attr { display: none; }
+.md-fn-count::after { content: "."; }
+code, pre, samp, tt { font-family: var(--monospace); }
+kbd { margin: 0px 0.1em; padding: 0.1em 0.6em; font-size: 0.8em; color: rgb(36, 39, 41); background: rgb(255, 255, 255); border: 1px solid rgb(173, 179, 185); border-radius: 3px; box-shadow: rgba(12, 13, 14, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; white-space: nowrap; vertical-align: middle; }
+.md-comment { color: rgb(162, 127, 3); opacity: 0.6; font-family: var(--monospace); }
+code { text-align: left; vertical-align: initial; }
+a.md-print-anchor { white-space: pre !important; border-width: medium !important; border-style: none !important; border-color: currentcolor !important; display: inline-block !important; position: absolute !important; width: 1px !important; right: 0px !important; outline: 0px !important; background: 0px 0px !important; text-decoration: initial !important; text-shadow: initial !important; }
+.os-windows.monocolor-emoji .md-emoji { font-family: "Segoe UI Symbol", sans-serif; }
+.md-diagram-panel > svg { max-width: 100%; }
+[lang="flow"] svg, [lang="mermaid"] svg { max-width: 100%; height: auto; }
+[lang="mermaid"] .node text { font-size: 1rem; }
+table tr th { border-bottom-width: 0px; border-bottom-style: none; border-bottom-color: currentcolor; }
+video { max-width: 100%; display: block; margin: 0px auto; }
+iframe { max-width: 100%; width: 100%; border: medium; }
+.highlight td, .highlight tr { border: 0px; }
+mark { background: rgb(255, 255, 0); color: rgb(0, 0, 0); }
+.md-html-inline .md-plain, .md-html-inline strong, mark .md-inline-math, mark strong { color: inherit; }
+.md-expand mark .md-meta { opacity: 0.3 !important; }
+mark .md-meta { color: rgb(0, 0, 0); }
+@media print {
+  .typora-export h1, .typora-export h2, .typora-export h3, .typora-export h4, .typora-export h5, .typora-export h6 { break-inside: avoid; }
+}
+.md-diagram-panel .messageText { stroke: none !important; }
+.md-diagram-panel .start-state { fill: var(--node-fill); }
+.md-diagram-panel .edgeLabel rect { opacity: 1 !important; }
+.md-fences.md-fences-math { font-size: 1em; }
+.md-fences-advanced:not(.md-focus) { padding: 0px; white-space: nowrap; border: 0px; }
+.md-fences-advanced:not(.md-focus) { background: inherit; }
+.mermaid-svg { margin: auto; }
+.typora-export-show-outline .typora-export-content { max-width: 1440px; margin: auto; display: flex; flex-direction: row; }
+.typora-export-sidebar { width: 300px; font-size: 0.8rem; margin-top: 80px; margin-right: 18px; }
+.typora-export-show-outline #write { --webkit-flex: 2; flex: 2 1 0%; }
+.typora-export-sidebar .outline-content { position: fixed; top: 0px; max-height: 100%; overflow: hidden auto; padding-bottom: 30px; padding-top: 60px; width: 300px; }
+@media screen and (max-width: 1024px) {
+  .typora-export-sidebar, .typora-export-sidebar .outline-content { width: 240px; }
+}
+@media screen and (max-width: 800px) {
+  .typora-export-sidebar { display: none; }
+}
+.outline-content li, .outline-content ul { margin-left: 0px; margin-right: 0px; padding-left: 0px; padding-right: 0px; list-style: none; overflow-wrap: anywhere; }
+.outline-content ul { margin-top: 0px; margin-bottom: 0px; }
+.outline-content strong { font-weight: 400; }
+.outline-expander { width: 1rem; height: 1.428571rem; position: relative; display: table-cell; vertical-align: middle; cursor: pointer; padding-left: 4px; }
+.outline-expander::before { content: ""; position: relative; font-family: Ionicons; display: inline-block; font-size: 8px; vertical-align: middle; }
+.outline-item { padding-top: 3px; padding-bottom: 3px; cursor: pointer; }
+.outline-expander:hover::before { content: ""; }
+.outline-h1 > .outline-item { padding-left: 0px; }
+.outline-h2 > .outline-item { padding-left: 1em; }
+.outline-h3 > .outline-item { padding-left: 2em; }
+.outline-h4 > .outline-item { padding-left: 3em; }
+.outline-h5 > .outline-item { padding-left: 4em; }
+.outline-h6 > .outline-item { padding-left: 5em; }
+.outline-label { cursor: pointer; display: table-cell; vertical-align: middle; text-decoration: none; color: inherit; }
+.outline-label:hover { text-decoration: underline; }
+.outline-item:hover { border-color: rgb(245, 245, 245); background-color: var(--item-hover-bg-color); }
+.outline-item:hover { margin-left: -28px; margin-right: -28px; border-left-width: 28px; border-left-style: solid; border-left-color: transparent; border-right-width: 28px; border-right-style: solid; border-right-color: transparent; }
+.outline-item-single .outline-expander::before, .outline-item-single .outline-expander:hover::before { display: none; }
+.outline-item-open > .outline-item > .outline-expander::before { content: ""; }
+.outline-children { display: none; }
+.info-panel-tab-wrapper { display: none; }
+.outline-item-open > .outline-children { display: block; }
+.typora-export .outline-item { padding-top: 1px; padding-bottom: 1px; }
+.typora-export .outline-item:hover { margin-right: -8px; border-right-width: 8px; border-right-style: solid; border-right-color: transparent; }
+.typora-export .outline-expander::before { content: "+"; font-family: inherit; top: -1px; }
+.typora-export .outline-expander:hover::before, .typora-export .outline-item-open > .outline-item > .outline-expander::before { content: "−"; }
+.typora-export-collapse-outline .outline-children { display: none; }
+.typora-export-collapse-outline .outline-item-open > .outline-children, .typora-export-no-collapse-outline .outline-children { display: block; }
+.typora-export-no-collapse-outline .outline-expander::before { content: "" !important; }
+.typora-export-show-outline .outline-item-active > .outline-item .outline-label { font-weight: 700; }
+.md-inline-math-container mjx-container { zoom: 0.95; }
+mjx-container { break-inside: avoid; }
+.md-alert.md-alert-note { border-left-color: rgb(9, 105, 218); }
+.md-alert.md-alert-important { border-left-color: rgb(130, 80, 223); }
+.md-alert.md-alert-warning { border-left-color: rgb(154, 103, 0); }
+.md-alert.md-alert-tip { border-left-color: rgb(31, 136, 61); }
+.md-alert.md-alert-caution { border-left-color: rgb(207, 34, 46); }
+.md-alert { padding: 0px 1em; margin-bottom: 16px; color: inherit; border-left-width: 0.25em; border-left-style: solid; border-left-color: rgb(0, 0, 0); }
+.md-alert-text-note { color: rgb(9, 105, 218); }
+.md-alert-text-important { color: rgb(130, 80, 223); }
+.md-alert-text-warning { color: rgb(154, 103, 0); }
+.md-alert-text-tip { color: rgb(31, 136, 61); }
+.md-alert-text-caution { color: rgb(207, 34, 46); }
+.md-alert-text { font-size: 0.9rem; font-weight: 700; }
+.md-alert-text svg { fill: currentcolor; position: relative; top: 0.125em; margin-right: 1ch; overflow: visible; }
+.md-alert-text-container::after { content: attr(data-text); text-transform: capitalize; pointer-events: none; margin-right: 1ch; }
+
+</style>
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700,700italic&amp;subset=latin,cyrillic-ext,cyrillic,latin-ext' type='text/css' />
+<style type='text/css'  id="style-theme_css">/* meyer reset -- http://meyerweb.com/eric/tools/css/reset/ , v2.0 | 20110126 | License: none (public domain) */
+
+@include-when-export url(https://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700,700italic&subset=latin,cyrillic-ext,cyrillic,latin-ext);
+
+/* =========== */
+
+/* pt-serif-regular - latin */
+/* pt-serif-italic - latin */
+/* pt-serif-700 - latin */
+/* pt-serif-700italic - latin */
+:root {
+	--active-file-bg-color: #dadada;
+	--active-file-bg-color: rgba(32, 43, 51, 0.63);
+	--active-file-text-color: white;
+	--bg-color: #f3f2ee;
+	--text-color: #1f0909;
+	--control-text-color: #444;
+	--rawblock-edit-panel-bd: #e5e5e5;
+
+	--select-text-bg-color: rgba(32, 43, 51, 0.63);
+  --select-text-font-color: white;
+}
+
+pre {
+	--select-text-bg-color: #36284e;
+	--select-text-font-color: #fff;
+}
+
+html {
+	font-size: 16px;
+	-webkit-font-smoothing: antialiased;
+}
+
+html, body {
+	background-color: #f3f2ee;
+	font-family: "PT Serif", 'Times New Roman', 'SF Pro', Times, serif;
+	color: #1f0909;
+	line-height: 1.5em;
+}
+
+/*#write {
+	overflow-x: auto;
+    max-width: initial;
+	padding-left: calc(50% - 17em);
+    padding-right: calc(50% - 17em);
+}
+
+@media (max-width: 36em) {
+ 	#write {
+ 		padding-left: 1em;
+    	padding-right: 1em;
+ 	}
+}*/
+
+#write {
+	max-width: 40em;
+}
+
+@media only screen and (min-width: 1400px) {
+	#write {
+			max-width: 914px;
+	}
+}
+
+ol li {
+	list-style-type: decimal;
+	list-style-position: outside;
+}
+ul li {
+	list-style-type: disc;
+	list-style-position: outside;
+}
+
+ol,
+ul {
+	list-style: none;
+}
+
+blockquote,
+q {
+	quotes: none;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+/* styles */
+
+/* ====== */
+
+/* headings */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-weight: bold;
+}
+h1 {
+	font-size: 1.875em;
+	/*30 / 16*/
+	line-height: 1.6em;
+	/* 48 / 30*/
+	margin-top: 2em;
+}
+h2,
+h3 {
+	font-size: 1.3125em;
+	/*21 / 16*/
+	line-height: 1.15;
+	/*24 / 21*/
+	margin-top: 2.285714em;
+	/*48 / 21*/
+	margin-bottom: 1.15em;
+	/*24 / 21*/
+}
+h3 {
+	font-weight: normal;
+}
+h4 {
+	font-size: 1.125em;
+	/*18 / 16*/
+	margin-top: 2.67em;
+	/*48 / 18*/
+}
+h5,
+h6 {
+	font-size: 1em;
+	/*16*/
+}
+h1 {
+	border-bottom: 1px solid;
+	margin-bottom: 1.875em;
+	padding-bottom: 0.8125em;
+}
+/* links */
+
+a {
+	text-decoration: none;
+	color: #065588;
+}
+a:hover,
+a:active {
+	text-decoration: underline;
+}
+/* block spacing */
+
+p,
+blockquote,
+.md-fences {
+	margin-bottom: 1.5em;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	margin-bottom: 1.5em;
+}
+/* blockquote */
+
+blockquote {
+	font-style: italic;
+	border-left: 5px solid;
+	margin-left: 2em;
+	padding-left: 1em;
+}
+/* lists */
+
+ul,
+ol {
+	margin: 0 0 1.5em 1.5em;
+}
+/* tables */
+.md-meta,.md-before, .md-after {
+	color:#999;
+}
+
+table {
+	margin-bottom: 1.5em;
+	/*24 / 16*/
+	font-size: 1em;
+	/* width: 100%; */
+}
+thead th,
+tfoot th {
+	padding: .25em .25em .25em .4em;
+	text-transform: uppercase;
+}
+th {
+	text-align: left;
+}
+td {
+	vertical-align: top;
+	padding: .25em .25em .25em .4em;
+}
+
+code,
+.md-fences {
+	background-color: #dadada;
+}
+
+code {
+	padding-left: 2px;
+	padding-right: 2px;
+}
+
+.md-fences {
+	margin-left: 2em;
+	margin-bottom: 3em;
+	padding-left: 1ch;
+	padding-right: 1ch;
+}
+
+pre,
+code,
+tt {
+	font-size: .875em;
+	line-height: 1.714285em;
+}
+/* some fixes */
+
+h1 {
+	line-height: 1.3em;
+	font-weight: normal;
+	margin-bottom: 0.5em;
+}
+
+p + ul,
+p + ol{
+	margin-top: .5em;
+}
+
+h3 + ul,
+h4 + ul,
+h5 + ul,
+h6 + ul,
+h3 + ol,
+h4 + ol,
+h5 + ol,
+h6 + ol {
+	margin-top: .5em;
+}
+
+li > ul,
+li > ol {
+	margin-top: inherit;
+	margin-bottom: 0;
+}
+
+li ol>li {
+	list-style-type: lower-alpha;
+}
+
+li li ol>li{
+	list-style-type: lower-roman;
+}
+
+h2,
+h3 {
+	margin-bottom: .75em;
+}
+hr {
+	border-top: none;
+	border-right: none;
+	border-bottom: 1px solid;
+	border-left: none;
+}
+h1 {
+	border-color: #c5c5c5;
+}
+blockquote {
+	border-color: #bababa;
+	color: #656565;
+}
+
+blockquote ul,
+blockquote ol {
+	margin-left:0;
+}
+
+.ty-table-edit {
+	background-color: transparent;
+}
+thead {
+	background-color: #dadada;
+}
+tr:nth-child(even) {
+	background: #e8e7e7;
+}
+hr {
+	border-color: #c5c5c5;
+}
+.task-list{
+	padding-left: 1rem;
+}
+
+.md-task-list-item {
+	padding-left: 1.5rem;
+	list-style-type: none;
+}
+
+.md-task-list-item > input:before {
+	content: '\221A';
+	display: inline-block;
+	width: 1.25rem;
+  	height: 1.6rem;
+	vertical-align: middle;
+	text-align: center;
+	color: #ddd;
+	background-color: #F3F2EE;
+}
+
+.md-task-list-item > input:checked:before,
+.md-task-list-item > input[checked]:before{
+	color: inherit;
+}
+
+#write pre.md-meta-block {
+	min-height: 1.875rem;
+	color: #555;
+	border: 0px;
+	background: transparent;
+	margin-top: -4px;
+	margin-left: 1em;
+	margin-top: 1em;
+}
+
+.md-image>.md-meta {
+	color: #9B5146;
+}
+
+.md-image>.md-meta{
+	font-family: Menlo, 'Ubuntu Mono', Consolas, 'Courier New', 'Microsoft Yahei', 'Hiragino Sans GB', 'WenQuanYi Micro Hei', serif;
+}
+
+
+#write>h3.md-focus:before{
+	left: -1.5rem;
+	color:#999;
+	border-color:#999;
+}
+#write>h4.md-focus:before{
+	left: -1.5rem;
+	top: .25rem;
+	color:#999;
+	border-color:#999;
+}
+#write>h5.md-focus:before{
+	left: -1.5rem;
+	top: .0.3125rem;
+	color:#999;
+	border-color:#999;
+}
+#write>h6.md-focus:before{
+	left: -1.5rem;
+	top: 0.3125rem;
+	color:#999;
+	border-color:#999;
+}
+
+.md-toc:focus .md-toc-content{
+	margin-top: 19px;
+}
+
+.md-toc-content:empty:before{
+	color: #065588;
+}
+.md-toc-item {
+	color: #065588;
+}
+#write div.md-toc-tooltip {
+	background-color: #f3f2ee;
+}
+
+#typora-sidebar {
+	background-color: #f3f2ee;
+	-webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.375);
+  	box-shadow: 0 6px 12px rgba(0, 0, 0, 0.375);
+}
+
+.pin-outline #typora-sidebar {
+	background: inherit;
+	box-shadow: none;
+	border-right: 1px dashed;
+}
+
+.pin-outline #typora-sidebar:hover .outline-title-wrapper {
+	border-left:1px dashed;
+}
+
+.outline-item:hover {
+  background-color: #dadada;
+  border-left: 28px solid #dadada;
+  border-right: 18px solid #dadada;
+}
+
+.typora-node .outline-item:hover {
+  	border-right: 28px solid #dadada;
+}
+
+.outline-expander:before {
+  content: "\f0da";
+  font-family: FontAwesome;
+  font-size:14px;
+  top: 1px;
+}
+
+.outline-expander:hover:before,
+.outline-item-open>.outline-item>.outline-expander:before {
+  content: "\f0d7";
+}
+
+.modal-content {
+	background-color: #f3f2ee;
+}
+
+.auto-suggest-container ul li {
+	list-style-type: none;
+}
+
+/** UI for electron */
+
+.megamenu-menu,
+#top-titlebar, #top-titlebar *,
+.megamenu-content {
+	background: #f3f2ee;
+	color: #1f0909;
+}
+
+.megamenu-menu-header {
+	border-bottom: 1px dashed #202B33;
+}
+
+.megamenu-menu {
+	box-shadow: none;
+	border-right: 1px dashed;
+}
+
+header, .context-menu, .megamenu-content, footer {
+	font-family: "PT Serif", 'Times New Roman', Times, serif;
+    color: #1f0909;
+}
+
+#megamenu-back-btn {
+	color: #1f0909;
+	border-color: #1f0909;
+}
+
+.megamenu-menu-header #megamenu-menu-header-title:before {
+	color: #1f0909;
+}
+
+.megamenu-menu-list li a:hover, .megamenu-menu-list li a.active {
+	color: inherit;
+	background-color: #e8e7df;
+}
+
+.long-btn:hover {
+	background-color: #e8e7df;
+}
+
+#recent-file-panel tbody tr:nth-child(2n-1) {
+    background-color: transparent !important;
+}
+
+.megamenu-menu-panel tbody tr:hover td:nth-child(2) {
+    color: inherit;
+}
+
+.megamenu-menu-panel .btn {
+	background-color: #D2D1D1;
+}
+
+.btn-default {
+	background-color: transparent;
+}
+
+.typora-sourceview-on #toggle-sourceview-btn,
+.ty-show-word-count #footer-word-count {
+	background: #c7c5c5;
+}
+
+#typora-quick-open {
+    background-color: inherit;
+}
+
+.md-diagram-panel {
+	margin-top: 8px;
+}
+
+.file-list-item-file-name {
+	font-weight: initial;
+}
+
+.file-list-item-summary {
+	opacity: 1;
+}
+
+.file-list-item {
+	color: #777;
+}
+
+.file-list-item.active {
+	background-color: inherit;
+	color: black;
+}
+
+.ty-side-sort-btn.active {
+	background-color: inherit;
+}
+
+.file-list-item.active .file-list-item-file-name  {
+	font-weight: bold;
+}
+
+.file-list-item{
+    opacity:1 !important;
+}
+
+.file-library-node.active>.file-node-background{
+	background-color: rgba(32, 43, 51, 0.63);
+	background-color: var(--active-file-bg-color);
+}
+
+.file-tree-node.active>.file-node-content{
+	color: white;
+	color: var(--active-file-text-color);
+}
+
+.md-task-list-item>input {
+	margin-left: -1.7em;
+	margin-top: calc(1rem - 12px);
+	-webkit-appearance: button;
+}
+
+input {
+	border: 1px solid #aaa;
+}
+
+.megamenu-menu-header #megamenu-menu-header-title,
+.megamenu-menu-header:hover, 
+.megamenu-menu-header:focus {
+	color: inherit;
+}
+
+.dropdown-menu .divider {
+	border-color: #e5e5e5;
+	opacity: 1;
+}
+
+/* https://github.com/typora/typora-issues/issues/2046 */
+.os-windows-7 strong,
+.os-windows-7 strong  {
+	font-weight: 760;
+}
+
+.ty-preferences .btn-default {
+	background: transparent;
+}
+
+.ty-preferences .window-header {
+	border-bottom: 1px dashed #202B33;
+	box-shadow: none;
+}
+
+#sidebar-loading-template, #sidebar-loading-template.file-list-item {
+	color: #777;
+}
+
+.searchpanel-search-option-btn.active {
+	background: #777;
+	color: white;
+}
+
+.export-detail, .light .export-detail, 
+.light .export-item.active, 
+.light .export-items-list-control {
+	background: #e0e0e0;
+	border-radius: 2px;
+	font-weight: 700;
+	color: inherit
+}</style>
+<style type='text/css'  id="style-base_user_css">:root {
+    --mermaid-sequence-numbers: on; /* or "on", see https://mermaid-js.github.io/mermaid/#/sequenceDiagram?id=sequencenumbers*/
+  }</style>
+<style type='text/css'  id="style-lp">ol, ul {padding-left: 40px}</style>
+<style type='text/css'  id="style-mac-print"> @media print { @page {margin: 0 0 0 0;} body.typora-export {padding-left: 0; padding-right: 0;} #write {padding:0;}}</style>
+
+<title>On DHH’s “As I Remember London”</title>
+</head>
+<body class='typora-export'><div class='typora-export-content'>
+<div id='write'  class=''><h1 id='on-dhhs-as-i-remember-london'><span>On DHH’s “As I Remember London”</span></h1><p><span>David Heinemeier Hansson recently </span><a href='https://world.hey.com/dhh/as-i-remember-london-e7d38e64'><span>wrote a piece about London and the “unite the kingdom” protests</span></a><span> that happened there over the weekend.</span></p><p><span>He is no stranger to saying controversial things, but this blog post stank so much that I felt the need to respond and address the points he made in it.</span></p><p><span>There is a lot to unpack, so bear with me.</span></p><p><span>I’ll start with this quote from the beginning:</span></p><blockquote><p><span>As soon as I was old enough to travel on my own, London was where I wanted to go. Compared to Copenhagen at the time, there was something so majestic about Big Ben, Trafalgar Square, and even the Tube around the turn of the millenium. Not just because their capital is twice as old as ours, but because it endured twice as much, through the Blitz and the rest of it, yet never lost its nerve. I thought I might move there one day.</span></p></blockquote><p><span>I know exactly where David is coming from. I was born in London but spent my childhood growing up in Bedford, about an hour’s train ride north of the capital. I looked up to London so much that I went to study at university there in 2003.</span></p><blockquote><p><span>That was then. Now, I wouldn&#39;t dream of it. London is no longer the city I was infatuated with in the late &#39;90s and early 2000s. Chiefly because it&#39;s </span><a href='https://en.wikipedia.org/wiki/Ethnic_groups_in_London'><span>no longer full of native Brits</span></a><span>. In 2000, more than sixty percent of the city were native Brits. By 2024, that had dropped to about a third. A statistic as evident as day when you walk the streets of London now.</span></p><p><span>Copenhagen, by comparison, was about eighty-five percent native Danes in 2000, and is still three-quarters today. Enough of a foreign presence to feel cosmopolitan, but still distinctly Danish in all of its ways. Equally statistically evident on streets and bike lanes.</span></p><p><span>But I think, what would Copenhagen feel like, if only a third of it was Danish, like London? It would feel completely foreign, of course. Alien, even. So I get the frustration that many Brits have with the way mass immigration has changed the culture and makeup of not just London, but their whole country.</span></p></blockquote><p><span>There are multiple points to address here.</span></p><ol><li><p><span>Native Brits - what does David mean by that?</span></p></li><li><p><span>Comparing Copenhagen to London is comparing Apples to Oranges - London is more than just a capital city.</span></p></li><li><p><span>Again - comparing Denmark and the UK is comparing Apples to Oranges - I’ll explain in more detail.</span></p></li></ol><p><span>I want to start by talking about London.</span></p><h2 id='london'><span>London</span></h2><p><span>Like Copenhagen, London is the capital city of its country and the home of its government and royal family. </span></p><p><span>However, London is not just a capital city of England and the United Kingdom. It is a global city. It is the historical heart of the British Empire and the British commonwealth of 56 nations. It is one of the key financial hubs in the world of finance, alongside New York and Hong Kong. It is home to almost 9 million people, about 13% of the UK’s 69 million population. It is also one of the most expensive cities to live in the world. </span></p><p><span>And because of all this, it is one of the most diverse cities in the world. It is sometimes called the city of the world.</span></p><p><span>Therefore unlike other capital cities, London isn’t full of native Brits. But then again, why should that trouble David, or anyone else for that matter?</span></p><h2 id='what-are-native-brits'><span>What are native Brits?</span></h2><p><span>This one is a curious phrase. What does it mean - perhaps people born in the UK, perhaps of a certain ethnicity (white)?</span></p><p><span>Well I’m born in the UK (London of all places), and I’m white. Does that make me a ‘native Brit’?</span></p><p><span>Not really. You see, my parents are Danish.</span></p><p><span>They came over in the 1980s and I was born here. I grew up in a household that spoke Danish and ate Mackeral on Ryebread sandwiches. But I also spoke English, and drank Tea, played football and supported Manchester United like many did in the 90’s  (ahh the glory days) - Peter Schmeichel was my idol and I played in goal because of him. And when it came to supporting a nation - I supported both Denmark and England at Euro 96 (and became a neutral observer in the few times they played each other).</span></p><p><span>I am a child of two worlds, and I’m far from alone in that experience of Britain. </span></p><p><span>Owing to its historical Empire and its post-WW2 request for citizens of the commonwealth to come and make Britain their home, a lot of people in the UK grew up in households with parents from many different backgrounds; Indian, Italian, Jamaican, you name it.</span></p><p><span>My childhood hometown of Bedford being a great example. Bedford has over the decades become home to people from Italy, India, Ireland, Pakistan, Bangladesh, war-torn Yugoslavia, and in the 2000s people from Poland, Latvia and Lithuania. In fact, Bedford has the largest anglo-Italian population in England, so much so that when Italy won the World Cup back in 2006, Sky Sports filmed the town square as over 10,000 of the town’s citizens celebrated Italy’s win.</span></p><p><span>Bedford is a remarkable town in how diverse it is, because not all of the UK is like that. I remember my friend Daljinder went to Keele university in the west-midlands. Though his parents are Indian, the students at that university thought that he was Greek; they’d never seen an Indian with a light skin complexion. </span></p><p><span>Immigration within the UK is a varied experience, and if you really want to explore what it means to be a native Brit, well, technically there’s no such thing.</span></p><p><span>You see over the many years of Britain’s history, the Romans, the Vikings, the Anglo-Saxons and the Normans, they’ve all come to the UK and made it home at some point. In Colchester the Romans managed to leave some landmarks that stand to this day, and there’s even a part of town named the Dutch Quarter - it was home to Flemish protestant refugees in the 16th century. </span></p><p><span>Are the Welsh native Brits? Well, DNA testing has revealed ancestral links to the Iberian Peninsula (Spain and Portugal).</span></p><p><span>The further you look, the more you realise that Britain has no native or indigenous population - it’s a mongrel nation. </span></p><p><span>Sir Winston Churchill is credited with that phrase, but actually its origins can be traced back to Daniel Defoe’s satirical poem “The True-Born Englishman” - written all the way back in 1701. He wrote it to mock the xenophobic attacks made on King William III for being Dutch-born.</span></p><h2 id='what-is-it-to-be-british'><span>What is it to be British?</span></h2><p><span>Britain is an incredibly diverse country, not just in terms of the ethnic mix, but also in terms of the regional diversity of dialects, languages and sub-cultures. There are so many facets to it. And when you explore the origins of the things that you would call British, those things have origins that come from other places, and we’ve made them part of our identity and culture.</span></p><p><span>Baked Beans? The United States. Snooker? Jaipur, India. Tea? China. Fish and Chips? Jewish immigrants from the Netherlands, Spain and Portugal.</span></p><p><span>What about the Pub, that’s got to be a British invention? </span></p><p><span>The Romans.</span></p><p><span>These things that we think of as being quintessentially British, are really things that we’ve picked up and adapted in our own way (Chicken Tikka Masala being a great example).</span></p><p><span>British culture and identity is not set in stone - it changes with the times.</span></p><p><span>We can sometimes be very ignorant about that (especially British colonial history - as I found out working in Sweden and talking to colleagues from India). That’s why it is important to spend the time to learn about our history, as well as to educate others too.</span></p><h2 id='why-the-uk-and-denmark-are-really-different-countries'><span>Why the UK and Denmark are really different countries</span></h2><p><span>Having grown up in one country and visited relatives in the other, you get the benefit of being able to compare notes if you like.</span></p><p><span>Denmark has a much higher tax rate than the UK, partly because it is a smaller country, but also because it has a different attitude towards tax than people in the UK. They pay a lot in taxes, but what they get back in return is a level of public services that gives them a high quality of life, and it’s most likely one of the reasons that they rank consistently within the top 2 countries in the world for happiness (Finland has edged them out for the past 8 years).</span></p><p><span>The UK does not have the same attitude towards taxation. The political parties in the UK have consistently campaigned at election time on a platform of either lowering or at least keeping taxation at the same level, and now in the current economic climate they are faced with the reality that it is increasingly difficult to avoid raising taxes in the UK, such is the challenging state of the UK’s finances.</span></p><p><span>In Denmark there is a concept called Janteloven, and the best way I can explain it is for you to read about it:</span></p><p><a href='https://www.scandinaviastandard.com/what-is-janteloven-the-law-of-jante/' target='_blank' class='url'>https://www.scandinaviastandard.com/what-is-janteloven-the-law-of-jante/</a></p><p><span>Now imagine that this is sort of laid out as the informal rules to live your life by. </span></p><p><span>If you tried to express those social rules to British people, they’d probably go “you what?”, and some would tell you to piss off.</span></p><p><span>That goes some way to explaining why Denmark experiences less inequality than in the UK, where the effects of austerity following the global financial crisis and the economic slow-puncture of Brexit has exacerbated the levels of inequality here.</span></p><p><span>In fact, the level of inequality in Britain is shameful; in the UK, we have over 2,500 food banks, used not just by the elderly and unemployed, but also by working people. That is a daming indictment of how Britain has changed since the 2000s.</span></p><p><span>I could be wrong, but in my opinion the inequality being experienced by the UK public is feeding into a general dissatisfaction with the quality of life in the UK and the government in general. It’s an opinion, and I could be wrong, but I think that it could be a factor here in why Tommy Robinson’s march attracted so many people.</span></p><h2 id='the-flag'><span>The Flag</span></h2><blockquote><p><span>That frustration was on wide display in </span><a href='https://x.com/hashtag/FreedomMarch'><span>Tommy Robinson&#39;s march</span></a><span> yesterday. British and English flags flying high and proud, like they would in Copenhagen on the day of a national soccer match. Which was both odd to see but also heartwarming. You can sometimes be forgiven for thinking that all of Britain is lost in self-loathing, shame, and suicidal empathy. But of course it&#39;s not.</span></p></blockquote><p><span>The Danish flag, the Dannebrog, is used in a very nice and positive way. It’s displayed on boats and buildings, put on poles in gardens, painted on peoples faces for football matches, and even put on birthday cakes and buns. It’s also the oldest recorded flag in use in the world.</span></p><p><span>The English flag and the British flag have a more complicated history, which probably David doesn’t know about.</span></p><p><span>Normally you’ll see the English flag at sports events and on people’s cars during football tournaments. The British flag you’ll see sometimes on British high streets and during major Royal events.</span></p><p><span>However, in the past the English and British flags were co-opted for a darker purpose - nationalism.</span></p><p><span>During the 1970’s, far right political movements like the National Front and the British National Party would go on marches down the streets waving those flags, promoting ideas of White nationalism and chanting phrases like “send them back” or “Britain for the British”.</span></p><p><span>This is one example: </span></p><p><img src="https://www.workersliberty.org/files/pictures/Yorkshire_NF.jpeg" alt="NF march"></p><p><span>And here’s another example of the National Front march in 2004:</span></p><p><a href='https://www.alamy.com/stock-photo-british-national-front-supporters-march-through-bermondsey-south-london-107533062.html' target='_blank' class='url'>https://www.alamy.com/stock-photo-british-national-front-supporters-march-through-bermondsey-south-london-107533062.html</a></p><p><span>Compare those photos with the scenes from Saturday’s march, and you can understand why those flags are viewed with concern. </span><a href='https://www.magnumphotos.com/newsroom/society/short-hair-shorthand-far-right-uk-magnum-archive-chris-steele-perkins-robert-marlow-robert-capa/'><span>Britain’s history with far right extremism is well-documented</span></a><span>. This is an unfortunate time in Britain’s past, and we do not want to return to that.</span></p><p><span>And David probably doesn’t know who Tommy Robinson is either:</span></p><h2 id='tommy-robinson'><span>Tommy Robinson</span></h2><p><span>Tommy Robinson is an English far-right activist and one of the UK’s most prominent anti-Islam campaigners. He was a member of the British National Party, and he also co-founded the English Defence League. </span></p><p><span>Here’s his Wikipedia </span><a href='https://en.wikipedia.org/wiki/Tommy_Robinson' target='_blank' class='url'>https://en.wikipedia.org/wiki/Tommy_Robinson</a><span>, and checkout his criminal record. </span></p><p><span>No wonder Reform UK leader Nigel Farage distanced himself from Elon Musk’s calls to release him from prison.</span></p><p><span>To put it in terms David might understand, he’s like the Rasmus Paludan of the UK.</span></p><h2 id='on-the-migrant-boats-and-asylum-hotels'><span>On the migrant boats and asylum hotels</span></h2><blockquote><p><span>Recently, </span><a href='https://politiken.dk/danmark/art10414206/I-2096-kan-flertallet-i-Danmark-være-indvandrere-eller-efterkommere#:~:text=I 2096 vil der være,indvandringstal fortsætter præcis som nu.'><span>a projection that Danes would be a minority in their own country by 2096</span></a><span> caused an enormous stir in Denmark. Politicians across the spectrum decried what a catastrophe that would be for this world&#39;s oldest continuous monarchy. But a demographic nightmare worse than that has already enveloped London!</span></p><p><span>So it&#39;s tough to blame the Brits for being pissed. No matter how hard they voted one way or the other, Brexit or no Brexit, the erosion of their national identity kept marching forward at an ever-greater pace. Not due to some unavoidable cosmic destiny, but due to equal parts policy and apathy. The boats kept coming, the </span><a href='https://news.sky.com/story/government-struggling-to-reduce-migrant-hotel-use-as-asylum-claims-hit-record-level-13415697'><span>migrant hotels kept expanding</span></a><span>, and the British authorities kept cracking down on anyone who dared criticize that trajectory or the present-day reality.</span></p></blockquote><p><span>I’ve laboured the point about how dumb it is to think in nativist terms when so much of human history is interlinked. I do however want to address his comments on the boats and migrant hotels.</span></p><p><span>So I think it helps to rather than parrot talking point, to actually get some numbers and do some maths.</span></p><p><span>How many people are coming over to the UK on boats? </span><a href='https://www.bbc.co.uk/news/articles/c8xgkx20dyvo'><span>Here is a BBC article</span></a><span>.</span></p><p><span>In 2024, the number of people coming across to the UK was just under 37,000, or just over 100 people per day. It sounds like a large number, until you compare it to the size of the UK population as a whole.</span></p><p><span>According to the World Bank, </span><a href='https://datacatalog.worldbank.org/search/dataset/0037712'><span>the UK population in 2024 was 69.23 million people</span></a><span>.</span></p><p><span>Therefore, if you measure the number of people coming over on boats as a percentage of the UK population, it comes to 0.054%, rounded to 3 decimal places. </span></p><p><span>0.054%  - that’s the figure.</span></p><p><span>However, if you count the number of people who have come across on boats since not just for 2024 but since records began in 2018 (about 7 years ago), then that number is estimated to be about 180,000 (also from the BBC article).</span></p><p><span>180,000 as a percentage of 69.23 million is 0.26%, or just over a quarter of 1%.</span></p><p><span>7 years of boat migrants adds up to just 0.26% of the UK’s population.</span></p><p><span>What about the cost of housing the migrants in hotels. Well Reuters did a recent analysis into this, and you can see it here: </span><a href='https://www.reuters.com/fact-check/housing-asylum-seekers-hotels-did-not-cost-uk-1-billion-pounds-month-202425-2025-06-20/' target='_blank' class='url'>https://www.reuters.com/fact-check/housing-asylum-seekers-hotels-did-not-cost-uk-1-billion-pounds-month-202425-2025-06-20/</a></p><p><span>There was a claim on social media that the UK was spending ~£1bn per month on housing asylum seekers in hotels, or £12bn a year.</span></p><p><span>Reuter’s did a fact check on that (a smart thing to do in the age of social media). </span></p><p><span>The real figure is around ~£108m per month, or £1.296bn per year.</span></p><p><span>How much is that compared to the UK government’s annual budget? Well, the </span><a href='https://obr.uk/forecasts-in-depth/brief-guides-and-explainers/public-finances/'><span>expenditure for 2024-2025 from the Office for Budget Responsibility is £1,279bn</span></a><span>, or just under £1.28tn.</span></p><p><span>£1.296bn of £1,279bn is 0.1033%, rounded to 4 decimal places.</span></p><p><span>We spend just over 0.1% of the UK’s annual budget on housing migrants.</span></p><p><span>Let that sink in. To be frank it is insane that the boat migrants and asylum seekers in hotels are attracting so much attention from politicians, the UK press, and the protestors. There are far bigger issues that need to be addressed in this country.</span></p><p><span>This is why it is so important to do your own research, and not just regurgitate what you saw on social media, especially in an age of disinformation campaigns.</span></p><h2 id='on-britain-arresting-people-for-tweets'><span>On Britain arresting people for tweets</span></h2><blockquote><p><span>Which brings us back to Robinson&#39;s powerful march yesterday. The banner said &quot;March for Freedom&quot;, and focused as much on that now distant-to-the-Brits concept of free speech, as it did on restoring national pride.</span></p><p><span>And for good reason! The totalitarian descent into censorious darkness in Britain has been as swift as its demographic shift. British police are now making </span><a href='https://freespeechunion.org/police-make-30-arrests-a-day-for-offensive-online-messages/'><em><span>30 arrests a day</span></em></a><span> for wrongthink, wrongspeech, and other online transgressions against &quot;the regime narrative&quot;, as the BBC would have reported, if this were a statistic from a foreign nation.</span></p><p><span>Most recently, five officers(!) came to arrest comedian Graham Linehan for illicit tweets. When much of the media reports a story like this, it&#39;s often without citing the specific words in question, such that the reader might imagine something far worse than what was actually said. So you should actually </span><a href='https://grahamlinehan.substack.com/p/i-just-got-arrested-again'><span>read the three tweets</span></a><span> that landed Linehan in jail, and earned him a legal restraining order against using X. It&#39;s grotesque.  </span></p></blockquote><p><span>David’s got a point about it being overhanded to send 5 armed officers to arrest Graham Linehan. </span></p><p><span>Here’s a bit worth reading from </span><a href='https://freespeechunion.org/police-make-30-arrests-a-day-for-offensive-online-messages/?v=7885444af42e'><span>a link that David embedded in that bit about 30 arrests a day</span></a><span>:</span></p><blockquote><p><span>They include David Wootton, 40, who is appealing against a conviction for dressing up as the Manchester Arena bomber, Salman Abedi, for a Halloween party last year.</span></p></blockquote><p><span>Some people have a terrible sense or lapse of judgement, and sometimes they do things that deserve condemnation.</span></p><p><span>Does it mean that they should be arrested for it? Well, that depends on how the UK law is interpreted, and the offence in question.</span></p><p><span>In the case of Graham Linehan, I read those tweets, and this tweet is the one I think was what he got arrested for:</span></p><blockquote><p><span>If a trans-identified male is in a female-only space, he is committing a violent, abusive act. Make a scene, call the cops and if all else fails, punch him in the balls.</span></p></blockquote><p><span>Knowing Graham Linehan’s well-loved TV Shows like Father Ted, Black Books and the IT Crowd, I imagine he was attempting to make a joke with that last statement “punch him in the balls”.</span></p><p><span>The problem is, that is open to interpretation, and someone else may take it literally. By saying ”punch”, technically he is inciting violence, which is a criminal offence, the same offence that Lucy Connelly was arrested and imprisoned for when she tweeted “set fire to all the... hotels [housing asylum seekers]... for all I care”.</span></p><p><span>Imagine if someone had decided to do that and set a hotel on fire?</span></p><p><span>Well, there’s no need to imagine it, because someone tried to do exactly that last year: </span><a href='https://www.bbc.co.uk/news/articles/c2ejkw88w4xo' target='_blank' class='url'>https://www.bbc.co.uk/news/articles/c2ejkw88w4xo</a><span>.</span></p><p><span>After Graham Linehan’s tweet, there was a public debate about whether the Police had gone too far and whether the legislation needed to be revisited. And it is good that such things can be discussed in a civilised manner in the public sphere.</span></p><p><span>Calling Britain totalitarian seems a bit of a stretch though, especially when you consider that </span><a href='https://www.independent.co.uk/news/world/europe/pussy-riot-russia-prison-ukraine-war-putin-b2828059.html'><span>members of Pussy Riot were given sentences of 8-13 years in absentia to Prison in Russia for criticising the war in Ukraine</span></a><span>.</span></p><h2 id='british-tactics'><span>British tactics</span></h2><blockquote><p><span>The easy way out of this uncomfortably </span><a href='https://x.com/TRobinsonNewEra/status/1967299244026630608'><span>large gathering of perfectly normal, peaceful Brits</span></a><span>who&#39;ve had enough is to tar them all as &quot;far right&quot;. That&#39;s not just a British tactic, but one used across Europe, and previously in the US as well. It used to work very well, because the historical stigma was so strong, but, like hurling &quot;nazi&quot; and &quot;fascist&quot; at the most middle-of-the-road political figures and positions, it&#39;s finally lost its power. </span></p></blockquote><p><span>Thankfully a journalist went and asked the perfectly normal, peaceful Brits who’ve had enough to give their views. </span></p><p><span>Check out the videos.</span></p><p><a href='https://x.com/thenewsagents/status/1967958981873414196?s=61' target='_blank' class='url'>https://x.com/thenewsagents/status/1967958981873414196?s=61</a></p><p><a href='https://x.com/thenewsagents/status/1967614660128968747?s=61' target='_blank' class='url'>https://x.com/thenewsagents/status/1967614660128968747?s=61</a></p><p><span>This line from a protestor really stuck out:</span></p><blockquote><p><span>“I want this country to stay... the exact same. --- Not to be racist but, dominantly white people. It’s our country in the end of the day”.</span></p></blockquote><p><span>And there you have it.</span></p><p><span>Is this what you agree with David?</span></p><p><span>I hoped not, but then you did later on write this:</span></p><blockquote><p><span> There&#39;s absolutely nothing racist or xenophobic in saying that Denmark is primarily a country for the Danes, Britain primarily a united kingdom for the Brits, and Japan primarily a set of islands for the Japanese.</span></p></blockquote><p><span>Or as the National Front in the UK would put it, “Britain for the British”.</span></p><h2 id='on-pakistani-rape-gangs'><span>On Pakistani rape gangs</span></h2><blockquote><p><span>I really feel for the Brits because it&#39;s not obvious how they get themselves out of this pickle. They&#39;re still reeling from </span><a href='https://www.economist.com/britain/2025/06/18/the-grooming-gangs-scandal-is-a-stain-on-the-british-state'><span>the Pakistani rape gangs</span></a><span> that were left free to terrorize cities like Rotherham and Rochdale for years on end with horror-movie-like scenes of the most despicable, depraved abuse of British girls. Unlike Linehan&#39;s tweets, I actually implore you not to peruse these stories too closely, though, because they&#39;ll make you sick. So how do you even begin to correct course?</span></p></blockquote><p><span>This is actually a story that needs to be read, so that people understand how such a horrible crime could be committed for years on end with nothing happening about it. Wikipedia article here: </span><a href='https://en.wikipedia.org/wiki/Rotherham_child_sexual_exploitation_scandal' target='_blank' class='url'>https://en.wikipedia.org/wiki/Rotherham_child_sexual_exploitation_scandal</a><span>.</span></p><p><span>In the </span><a href='https://www.rotherham.gov.uk/downloads/file/279/independent-inquiry-into-child-sexual-exploitation-in-rotherham'><span>Jay report</span></a><span> into the scandal, there is point 11.2 on page 91. Printed below:</span></p><blockquote><p><span>As has been stated many times before, there is no simple link between race and child sexual exploitation, and across the UK the greatest numbers of perpetrators of CSE are white men. The second largest category, according to the Children&#39;s Commissioner&#39;s report, are those from a minority ethnic background, particularly those recorded as &#39;Asian&#39;. </span></p><p><span>In Rotherham, the majority of known perpetrators were of Pakistani heritage including the five men convicted in 2010. The file reading carried out by the Inquiry also confirmed that the ethnic origin of many perpetrators was ‘Asian’. In one major case in the mid-2000s, the convicted perpetrator was Afghan.</span></p><p><span>Latterly, some child victims of CSE and some perpetrators had originated from the Roma Slovak community, with a steady increase in the number of child protection cases involving Roma children, though mainly in the category of neglect. Work with Roma families was one of the six priorities of the Child Sexual Exploitation sub-group of the Safeguarding Board in 2012. The Roma population in Rotherham was proportionately much larger than in bigger areas such as Bradford and Manchester.</span></p></blockquote><p><span>I thought that it was important to print that.</span></p><p><span>Also, that phrase “Pakistani rape gang” - maybe it’s a second-language issue, but it is not right to describe criminals based on their ethnicity. That is because it is open to being interpreted as a racial slur against anyone who happens to have the same ethnicity.</span></p><h2 id='demographic-replacement'><span>Demographic replacement</span></h2><blockquote><p><span>I don&#39;t know. But I&#39;m glad that there clearly are many Brits who are determined to find out. Unwilling to just let their society wither away while their bobbies chase bad tweets instead of </span><a href='https://www.standard.co.uk/news/crime/mobile-phone-theft-london-met-police-b1244212.html'><span>the rampant street thefts</span></a><span> or those barbaric rape gangs. Unwilling to resign the rest of the country to the kind of demographic replacement that befell London over the last two decades.</span></p></blockquote><p><span>It’s quite hard to read that paragraph and not interpret it as an outright expression of racism.</span></p><p><span>Demographic replacement ? - that is a term used by far right groups to describe a conspiracy that there is a deliberate plot to replace one ethnic group with another. To read David parroting it out like that is jaw-dropping.</span></p><p><span>The street thefts problem London is a real problem, and has been since 2017. I remember hearing about a colleague having his phone snatched out of his hand outside a pub in Central London. I wish we could do more about it.</span></p><p><span>I know that there are steps to at least prevent the thieves from accessing accounts and withdrawing money using them - such as the tips listed here: </span><a href='https://www.moneysavingexpert.com/mobiles/steps-to-take-before-your-phone-is-stolen/' target='_blank' class='url'>https://www.moneysavingexpert.com/mobiles/steps-to-take-before-your-phone-is-stolen/</a></p><p><span>Again, another reason why I suggested to read about the Rotherham grooming gang scandal is because there is a key detail: care home staff did report the issue to South Yorkshire Police, but the Police failed to act on it. That is absolutely shocking.</span></p><h2 id='nothing-racist-or-xenophobic'><span>Nothing racist or xenophobic</span></h2><blockquote><p><span>You can rest assured that I&#39;d be in the streets waving a Danish flag if these were my conditions in my native country. I think that&#39;s a pretty universal sentiment. There&#39;s absolutely nothing racist or xenophobic in saying that Denmark is primarily a country for the Danes, Britain primarily a united kingdom for the Brits, and Japan primarily a set of islands for the Japanese.</span></p></blockquote><p><span>Again, as the National Front in the UK would put it, “Britain for the British”. This attempt to normalise such language is unacceptable.</span></p><h2 id='concluding-thoughts'><span>Concluding thoughts</span></h2><p><span>I wouldn’t have felt the need to respond to this piece as much as I did if wasn’t such a strikingly-bad hot take laced with talking points mimicking the language of far right extremists, and to point out the things that I think are just plain wrong.</span></p><p><span>Seeing the initial protests of people painting St George’s Cross onto roundabouts and walls and then transmorph into a weekend protest reminiscent of the kind of marches carried out by the National Front and the BNP, it’s beginning to look like the slow creep of far right extremism, occurring slowly enough that like the parable of the boiled frog, the reaction doesn’t come until it is too late.</span></p><p><span>Also, guess where Saint George the patron saint of England is believed to be from? </span></p><p><span>Turkey.</span></p></div></div>
+</body>
+</html>
